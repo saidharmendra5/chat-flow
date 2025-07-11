@@ -9,7 +9,9 @@ const jwt = require('jsonwebtoken');
 const {io , app ,server, getReceiverSocketId} = require('./socket.js');
 const nodemailer = require('nodemailer');
 const { createEmailTemplate} = require('./email-template.js');
+const path = require('path');
 
+const __dirname = path.resolve();
 // const app = express()   no need of this app as we created app in socket.js and imported it
 app.use(express.json());
 // using app.use(cors()); is not enough , to use cookies we should use ->
@@ -19,6 +21,15 @@ app.use(cors({
 }));
 app.use(cookieParser());
 const port = process.env.PORT;
+
+if(process.env.NODE_ENV ==="production"){
+    app.use(express.static(path.join(__dirname ,'../project/dist')));
+
+    app.get("*" , (req , res) => {
+        res.sendFile(path.join(__dirname , "../project" , "dist" , "index.html"));
+    });
+}
+
 
 const startdatabase = async () => {
     await connect()
@@ -113,7 +124,7 @@ app.post('/chat/verifyuseremail' , async(req , res) => {
 
         res.cookie("token" , token , {
             httpOnly:true,
-            secure:false, // change to true in production
+            secure:true, // change to true in production
             maxAge: 2 * 24 * 60 * 60 * 1000 //2days in ms
         });
 

@@ -1,0 +1,21 @@
+{
+  "name": "chatapplication",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build":"npm install --prefix chatbackend && npm install --prefix project && npm run build --prefix project",
+    "start": "npm run start --prefix chatbackend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidharmendra5/chat-flow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saidharmendra5/chat-flow/issues"
+  },
+  "homepage": "https://github.com/saidharmendra5/chat-flow#readme",
+  "description": ""
+}
