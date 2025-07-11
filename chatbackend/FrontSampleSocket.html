@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io</title>
+    <!-- Include Socket.io client -->
+    <script src="/socket.io/socket.io.js"></script> 
+</head>
+<body>
+    <script>
+        const socket = io();  // Connect to the server
+
+        const message = "hi, I am Sai";
+
+        // Emit a message to the server
+        socket.emit("user-message", message);
+
+        // Optionally receive broadcasted messages
+        socket.on("message", (msg) => {
+            console.log("Received from server:", msg);
+        });
+    </script>
+</body>
+</html>
