@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { API_BASE_URL } from '../config/api';
 import { 
   MessageCircle, 
   Mail, 
@@ -84,7 +85,7 @@ const EmailVerificationPage = () => {
     console.log("mailtoverify at emailverification page :" , mailtoverify);
      try{
 
-     const response = await fetch('http://localhost:8000/chat/verifyuseremail' ,{
+     const response = await fetch(`${API_BASE_URL}/chat/verifyuseremail` ,{
       method: 'POST',
       credentials: 'include', // to send & receive cookies.
       headers : {"content-type":"application/json"},

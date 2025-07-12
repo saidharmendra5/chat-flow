@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { API_BASE_URL } from '../config/api';
 import {
   MessageCircle,
   Send,
@@ -46,7 +47,7 @@ const ChatPage = () => {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const response = await fetch("http://localhost:8000/chat/getfriendslist", {
+        const response = await fetch(`${API_BASE_URL}/chat/getfriendslist`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -68,7 +69,7 @@ const ChatPage = () => {
 
     useEffect(() => {
     if (loggeduser && !socket.current) {
-      socket.current = io('http://localhost:8000', { //creates a socket
+      socket.current = io(API_BASE_URL, { //creates a socket
         query: { userId: loggeduser._id }
       });
       
@@ -116,7 +117,7 @@ const ChatPage = () => {
 
   const getMessages = async (data) => {
     try {
-      const response = await fetch('http://localhost:8000/chat/getmessages', {
+      const response = await fetch(`${API_BASE_URL}/chat/getmessages`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data),
@@ -158,7 +159,7 @@ const ChatPage = () => {
       receiverId : selectedFriend._id,
       text : message
     }
-    const response = await fetch('http://localhost:8000/chat/sendmessage' , {
+    const response = await fetch(`${API_BASE_URL}/chat/sendmessage` , {
       method:"POST",
       headers:{"content-type" : "application/json"},
       body : JSON.stringify(sendmsgdata)

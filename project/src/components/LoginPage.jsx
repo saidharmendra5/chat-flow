@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 import { 
   MessageCircle, 
   Mail, 
@@ -47,7 +48,7 @@ const [loginState , setLoginState] = useState(null);
     //sai:
      try{
 
-     const response = await fetch('http://localhost:8000/chat/login' ,{
+     const response = await fetch(`${API_BASE_URL}/chat/login` ,{
       method: 'POST',
       credentials: 'include', // to send & receive cookies.
       headers : {"content-type":"application/json"},

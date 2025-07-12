@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 import { 
   MessageCircle, 
   User, 
@@ -64,7 +65,7 @@ const ProfilePage = () => {
     // Handle logout logic here
     console.log('Logging out...');
      try {
-      const res = await fetch('http://localhost:8000/chat/logout', {
+      const res = await fetch(`${API_BASE_URL}/chat/logout`, {
         method: 'POST',
         credentials: 'include',
       });

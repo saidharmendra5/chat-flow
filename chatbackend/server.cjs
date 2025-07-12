@@ -15,7 +15,7 @@ const path = require('path');
 app.use(express.json());
 // using app.use(cors()); is not enough , to use cookies we should use ->
 app.use(cors({
-    origin:'http://localhost:5173', //frontend url
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173', //frontend url
     credentials: true                //required to allow cookies
 }));
 app.use(cookieParser());
@@ -123,7 +123,8 @@ app.post('/chat/verifyuseremail' , async(req , res) => {
 
         res.cookie("token" , token , {
             httpOnly:true,
-            secure:true, // change to true in production
+            secure: process.env.NODE_ENV === 'production', // true in production
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 2 * 24 * 60 * 60 * 1000 //2days in ms
         });
 
@@ -157,7 +158,8 @@ app.post('/chat/login' , async (req , res) => {
 
         res.cookie("token" , token , {
             httpOnly:true,
-            secure:false, // change to true in production
+            secure: process.env.NODE_ENV === 'production', // true in production
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             maxAge: 2 * 24 * 60 * 60 * 1000 //2days in ms
         });
 
@@ -253,7 +255,8 @@ app.post("/chat/logout", async(req , res) => {
     res.clearCookie('token' , {
         path:'/',
         httpOnly:true,
-        secure:false
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
     res.status(200).send({message : "Logout successful"})
 })

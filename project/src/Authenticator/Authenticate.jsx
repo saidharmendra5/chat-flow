@@ -1,6 +1,7 @@
 //sai:
 import { useContext, useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../config/api';
 import { UserDetails } from "../context/UserContext";
 
 
@@ -12,7 +13,7 @@ const Authenticate = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('http://localhost:8000/chat/verify', {
+        const response = await fetch(`${API_BASE_URL}/chat/verify`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" }

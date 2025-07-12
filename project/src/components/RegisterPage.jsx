@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config/api';
 import { 
   MessageCircle, 
   Mail, 
@@ -59,7 +60,7 @@ const RegisterPage = () => {
     //sai:
      try{
 
-     const response = await fetch('http://localhost:8000/chat/register' ,{
+     const response = await fetch(`${API_BASE_URL}/chat/register` ,{
       method: 'POST',
       headers : {"content-type":"application/json"},
       body: JSON.stringify(formData)

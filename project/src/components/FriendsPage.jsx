@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { API_BASE_URL } from '../config/api';
 import { 
   MessageCircle, 
   UserPlus, 
@@ -58,7 +59,7 @@ const FriendsPage = () => {
     console.log("add form data", data);
     setAddfriendstate(null);
     try {
-      const response = await fetch('http://localhost:8000/chat/addfriend', {
+      const response = await fetch(`${API_BASE_URL}/chat/addfriend`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)
