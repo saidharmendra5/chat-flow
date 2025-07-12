@@ -11,7 +11,6 @@ const nodemailer = require('nodemailer');
 const { createEmailTemplate} = require('./email-template.js');
 const path = require('path');
 
-const __dirname = path.resolve();
 // const app = express()   no need of this app as we created app in socket.js and imported it
 app.use(express.json());
 // using app.use(cors()); is not enough , to use cookies we should use ->
