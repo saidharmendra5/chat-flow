@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     friends :[{type : mongoose.Schema.Types.ObjectId , ref :"User"}]
 },{timestamps : true});
 
+// Add indexes for better performance
+userSchema.index({ email: 1 });
+userSchema.index({ _id: 1, friends: 1 });
+
 const User = mongoose.model('User' , userSchema);
 
 module.exports = {connect , User};

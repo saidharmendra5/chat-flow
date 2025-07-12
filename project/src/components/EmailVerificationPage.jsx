@@ -97,7 +97,9 @@ const EmailVerificationPage = () => {
       setVerificationStatus(result.message);
      }else{
       setVerificationStatus(result.message);
-      navigate('/chat')
+      setTimeout(() => {
+        navigate('/chat');
+      }, 1500);
      }
     } catch (error) {
       setVerificationStatus('Network error. Please try again.');

@@ -40,6 +40,12 @@ const [loginState , setLoginState] = useState(null);
     e.preventDefault();
     // Handle login logic here
     console.log('Login attempt:', { email, password });
+    
+    if (!email || !password) {
+      setLoginState("Please fill in all fields");
+      return;
+    }
+    
     const data = {
       email:email,
       password:password
@@ -47,6 +53,7 @@ const [loginState , setLoginState] = useState(null);
 
     //sai:
      try{
+      setLoginState("Logging in...");
 
      const response = await fetch(`${API_BASE_URL}/chat/login` ,{
       method: 'POST',

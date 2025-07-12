@@ -61,6 +61,8 @@ const ChatPage = () => {
         }
       } catch (err) {
         console.error("Fetch error:", err);
+        // Show user-friendly error message
+        console.log("Failed to load friends. Please check your connection.");
       }
     };
     getFriends();

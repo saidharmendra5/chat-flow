@@ -58,6 +58,12 @@ const FriendsPage = () => {
     data.fromemail = loggeduser.email ;
     console.log("add form data", data);
     setAddfriendstate(null);
+    
+    if (!data.toemail) {
+      setAddfriendstate("Please enter an email address");
+      return;
+    }
+    
     try {
       const response = await fetch(`${API_BASE_URL}/chat/addfriend`, {
         method: "POST",

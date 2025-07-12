@@ -57,8 +57,20 @@ const RegisterPage = () => {
     e.preventDefault();
     // Handle registration logic here
     console.log('Registration attempt:', formData);
+    
+    if (!formData.fullname || !formData.email || !formData.password) {
+      setRegisterState("Please fill in all fields");
+      return;
+    }
+    
+    if (formData.password.length < 6) {
+      setRegisterState("Password must be at least 6 characters long");
+      return;
+    }
+    
     //sai:
      try{
+      setRegisterState("Creating account...");
 
      const response = await fetch(`${API_BASE_URL}/chat/register` ,{
       method: 'POST',
